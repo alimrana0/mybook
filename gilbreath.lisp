@@ -107,18 +107,18 @@
 (check= (everyotherp (interleave '(A B C D E) '(1 2 3 4 5)) t)  t)
 
 
-(defthm lemma1
+(defthm lemma-1
   (implies (losp ls)
            (losp (rev2 ls))))
 
 
-(defthm lemma-2
+(defthm conjecture-1-simp
   (implies (and (lonp x)
                 (losp y)
                 (equal (len2 x) (len2 y)))
            (everyotherp (interleave x y) nil)))
 
-(defthm lemma-3
+(defthm y-rev2-y-equivalence
   (implies (and (lonp x)
                 (losp y)
                 (losp (rev2 y))
@@ -126,7 +126,7 @@
            (equal (everyotherp (interleave x y) nil)
                   (everyotherp (interleave x (rev2 y)) nil)))
   :hints (("Goal"
-           :use (:instance lemma-2 (x x) (y (rev2 y))))))
+           :use (:instance conjecture-1-simp (x x) (y (rev2 y))))))
 
 
 
@@ -139,8 +139,8 @@
            (everyotherp (interleave x y) nil))
   :rule-classes ((:rewrite))
   :hints (("Goal"
-           :in-theory (disable lemma-2)
-           :use (:instance lemma-2 (x x) (y y))
+           :in-theory (disable conjecture-1-simp)
+           :use (:instance conjecture-1-simp (x x) (y y))
            )))#|ACL2s-ToDo-Line|#
 
   
